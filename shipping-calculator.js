@@ -34,6 +34,9 @@ export class ShippingCalculator {
       case "scheduled":
         c = Math.max(5.0, 15.0 - 0.50 * order.daysChosen);
         break;
+      case "teleport":
+        c = 50.0 + 0.10 * order.weightKg;
+        break;
       default:
         throw new Error(`Unknown shipping method: ${order.method}`);
     }
@@ -53,6 +56,9 @@ export class ShippingCalculator {
         break;
       case "scheduled":
       days = order.daysChosen;
+      break;
+      case "teleport":
+      days = 0;
       break;
       default:
         throw new Error(`Unknown shipping method: ${order.method}`);
