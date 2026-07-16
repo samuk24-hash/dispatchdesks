@@ -61,6 +61,11 @@
             <input type="radio" name="method" value="drone">
             <span class="lname">Drone</span><span class="lhint">1 day</span>
           </label>
+          <label class="level">
+            <input type="radio" name="method" value="scheduled">
+            <span class="lname">Scheduled</span><span class="lhint">you choose</span>
+          </label>
+
         </div>
       </section>
 
@@ -68,6 +73,11 @@
         <p class="label">Compare all levels</p>
         <div id="comparison" class="comparison"></div>
       </section>
+
+      <div id="scheduledDaysWrap" class="scheduled-days" style="display:none">
+          <p class="label">Days willing to wait</p>
+          <input type="number" id="scheduledDays" min="1" max="20" value="3">
+        </div>
 
       <!-- READOUT -->
       <section class="pane readout">
@@ -82,7 +92,7 @@
             <div class="led small" id="etaLed">— days</div>
           </div>
           <div class="status" id="status"><span class="dot"></span><span id="statusText">Ready.</span></div>
-        </div>
+app        </div>
       </section>
     </div>
 

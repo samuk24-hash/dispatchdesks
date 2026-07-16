@@ -26,6 +26,8 @@ const el = {
   status:   document.getElementById("status"),
   statusText: document.getElementById("statusText"),
   comparison: document.getElementById("comparison"),
+  scheduledDays: document.getElementById("scheduledDays"),
+  scheduledDaysWrap: document.getElementById("scheduledDaysWrap"),
 };
 
 function allMethods() {
@@ -53,6 +55,7 @@ function readOrder() {
     distanceKm: parseFloat(el.distance.value),
     international: el.intl.checked,
     method: document.querySelector('input[name="method"]:checked').value,
+    daysChosen: parseFloat(el.scheduledDays.value),
   };
 }
 
@@ -73,6 +76,9 @@ function recompute() {
   el.distanceVal.textContent = el.distance.value + " km";
   paintSlider(el.weight);
   paintSlider(el.distance);
+
+  const isScheduled = document.querySelector('input[name="method"]:checked').value === "scheduled";
+  el.scheduledDaysWrap.style.display = isScheduled ? "block" : "none";
 
   const order = readOrder();
   try {

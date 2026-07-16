@@ -31,8 +31,10 @@ export class ShippingCalculator {
         }
         c = 8.0 + 2.00 * order.weightKg + 0.03 * order.distanceKm;
         break;
+      case "scheduled":
+        c = Math.max(5.0, 15.0 - 0.50 * order.daysChosen);
+        break;
       default:
-      
         throw new Error(`Unknown shipping method: ${order.method}`);
     }
     if (order.international) c += 15.0;
@@ -49,6 +51,9 @@ export class ShippingCalculator {
       case "drone":     days = 1; break;
         if (order.distanceKm > 30) throw new Error("Drone shipping is limited to 30 km");
         break;
+      case "scheduled":
+      days = order.daysChosen;
+      break;
       default:
         throw new Error(`Unknown shipping method: ${order.method}`);
     }
