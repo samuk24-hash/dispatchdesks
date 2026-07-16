@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dispatch Desk — shipping calculator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="console" role="application" aria-label="Shipping calculator">
+    <header>
+      <div class="brand">
+        <span class="eyebrow">Dispatch&nbsp;Desk</span>
+        <h1>Shipping calculator</h1>
+      </div>
+      <span class="tag">no-pattern build</span>
+    </header>
+
+    <div class="grid">
+      <!-- INPUTS -->
+      <section class="pane">
+        <p class="label">Consignment</p>
+
+        <div class="field">
+          <div class="row"><span class="name">Weight</span><span class="val" id="weightVal">3.0 kg</span></div>
+          <input type="range" id="weight" min="0.5" max="20" step="0.5" value="3" aria-label="Weight in kilograms">
+        </div>
+
+        <div class="field">
+          <div class="row"><span class="name">Distance</span><span class="val" id="distanceVal">250 km</span></div>
+          <input type="range" id="distance" min="0" max="2000" step="10" value="250" aria-label="Distance in kilometres">
+        </div>
+
+        <label class="toggle" for="intl">
+          <span class="name">International</span>
+          <span class="switch">
+            <input type="checkbox" id="intl" aria-label="International destination">
+            <span class="track"></span><span class="knob"></span>
+          </span>
+        </label>
+
+        <p class="label" style="margin-top:24px">Service level</p>
+        <div class="levels" role="radiogroup" aria-label="Service level">
+          <label class="level">
+            <input type="radio" name="method" value="standard" checked>
+            <span class="lname">Standard</span><span class="lhint">ground</span>
+          </label>
+          <label class="level">
+            <input type="radio" name="method" value="express">
+            <span class="lname">Express</span><span class="lhint">2-day</span>
+          </label>
+          <label class="level">
+            <input type="radio" name="method" value="overnight">
+            <span class="lname">Overnight</span><span class="lhint">next-day air</span>
+          </label>
+          <label class="level">
+            <input type="radio" name="method" value="same_day">
+            <span class="lname">Same day</span><span class="lhint">1 day</span>
+          </label>
+
+        
+          </label>
+        </div>
+      </section>
+
+      <!-- READOUT -->
+      <section class="pane readout">
+        <p class="label">Readout</p>
+        <div class="scale">
+          <div class="metric">
+            <div class="k">Cost</div>
+            <div class="led" id="costLed">$0.00</div>
+          </div>
+          <div class="metric">
+            <div class="k">Est. delivery</div>
+            <div class="led small" id="etaLed">— days</div>
+          </div>
+          <div class="status" id="status"><span class="dot"></span><span id="statusText">Ready.</span></div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      This is the <b>un-refactored</b> build. All the logic lives in one class &mdash;
+      open <b>shipping-calculator.js</b> and find <b>ShippingCalculator</b>.
+    </footer>
+  </main>
+
+  <!-- app.js is an ES module; it imports the calculator itself -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
