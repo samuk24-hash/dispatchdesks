@@ -24,8 +24,12 @@ export class ShippingCalculator {
         break;
       case "same_day":
         c = 20.0 + 1.00 * order.weightKg + 0.10 * order.distanceKm;
-      default:
         break;
+      case "drone":
+        c = 8.0 + 2.00 * order.weightKg + 0.03 * order.distanceKm;
+        break;
+      default:
+      
         throw new Error(`Unknown shipping method: ${order.method}`);
     }
     if (order.international) c += 15.0;
@@ -39,6 +43,9 @@ export class ShippingCalculator {
       case "express":   days = 2; break;
       case "overnight": days = 1; break;
       case "same_day":  days = 1; break;
+      case "drone":     days = 1; break;
+        if (order.distanceKm > 30) throw new Error("Drone shipping is limited to 30 km");
+        break;
       default:
         throw new Error(`Unknown shipping method: ${order.method}`);
     }
