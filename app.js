@@ -25,7 +25,27 @@ const el = {
   etaLed:   document.getElementById("etaLed"),
   status:   document.getElementById("status"),
   statusText: document.getElementById("statusText"),
+  comparison: document.getElementById("comparison"),
 };
+
+function allMethods() {
+  return Array.from(document.querySelectorAll('input[name="method"]'))
+    .map(input => input.value);
+}
+
+function paintComparison() {
+  const base = readOrder();
+  const rows = allMethods().map(method => {
+    try {
+      const cost = calc.cost({ ...base, method });
+      return `<div class="cmp-row"><span>${method}</span><span>$${cost.toFixed(2)}</span></div>`;
+    } catch (err) {
+      return `<div class="cmp-row cmp-error"><span>${method}</span><span>${err.message}</span></div>`;
+    }
+  }).join("");
+
+  el.comparison.innerHTML = rows;
+}
 
 function readOrder() {
   return {
@@ -72,6 +92,7 @@ function recompute() {
     el.status.classList.add("error");
     el.statusText.textContent = err.message;
   }
+  paintComparison ();
 }
 
 ["input", "change"].forEach(evt =>

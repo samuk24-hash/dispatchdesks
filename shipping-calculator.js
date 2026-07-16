@@ -26,6 +26,9 @@ export class ShippingCalculator {
         c = 20.0 + 1.00 * order.weightKg + 0.10 * order.distanceKm;
         break;
       case "drone":
+          if (order.distanceKm > 30) {
+          throw new Error("Drone delivery is not available beyond 30 km");
+        }
         c = 8.0 + 2.00 * order.weightKg + 0.03 * order.distanceKm;
         break;
       default:
